@@ -31,29 +31,25 @@ $helper = new FacebookRedirectLoginHelper( 'http://infinite-sands-2324.herokuapp
 //to get permission to access
 $helper->getLoginUrl(array('scope' => 'user_events','email'));
  
-try {
-  $session = $helper->getSessionFromRedirect();
-} catch( FacebookRequestException $ex ) {
-  // When Facebook returns an error
-  echo print_r ($ex "Exception");
-} catch( Exception $ex ) {
-  // When validation fails or other local issues
-  echo print_r ($ex "Exception");
-}
 
-// see if we have a session
-if ( isset( $session ) ) {
-  // graph api request for user data
-  $request = new FacebookRequest( $session, 'GET', '/me' );
-  $response = $request->execute();
-  // get response
-  $graphObject = $response->getGraphObject();
-   
-  // print data
-  echo  print_r( $graphObject, 1 );
-} else {
-  // show login url
-  echo '<a href="' . $helper->getLoginUrl() . '">Login</a>';
+//  Get the access token for this app
+$session = FacebookSession::newAppSession();
+
+// make the API call, $datas contains the events for the facebook fan page BDE Polytech Marseille
+try {
+$request = new FacebookRequest(
+    $session,
+    'GET',
+    '/{347776302055884}/attending'
+);
+$response = $request->execute();
+
+$datas = $response->getGraphObject()->asArray();
+
+}catch (FacebookRequestException $e) {
+    echo $e->getMessage();
+}catch (\Exception $e) {
+    echo $e->getMessage();
 }
 
 ?>
