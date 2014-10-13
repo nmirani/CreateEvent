@@ -40,7 +40,7 @@ try {
 $request = new FacebookRequest(
     $session,
     'GET',
-    '/{347776302055884}/attending'
+    '/{560838064037283}/attending?fields=name,id'
 );
 $response = $request->execute();
 
