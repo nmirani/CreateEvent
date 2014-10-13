@@ -27,7 +27,7 @@ use Facebook\GraphObject;
 // init app with app id (APPID) and secret (SECRET)
 FacebookSession::setDefaultApplication('1486180144974468','528b621709faf5bf2277b5272a1572e6');
 
-$helper = new FacebookRedirectLoginHelper( 'http://agile-badlands-9486.herokuapp.com/' );
+$helper = new FacebookRedirectLoginHelper( 'http://infinite-sands-2324.herokuapp.com/' );
 //to get permission to access
 $helper->getLoginUrl(array('scope' => 'user_events','email'));
  
